@@ -1,12 +1,23 @@
 var $agregar = document.getElementById('agregar');
 var $borrar = document.getElementById('borrar');
 var $editar = document.getElementById('editar');
-var $textArea = document.getElementById('text-area');
 
 var patentes = [];
 
 function mostrarPatentes() {
-  $textArea.value = patentes.toString();
+  //encontrar al padre de cada option (el select)
+  var $platesList = document.querySelector('#plates-list');
+  //limpiar el select
+  $platesList.innerHTML = '';
+  // ir por el array de patentes, y por cada elemento que encuentre:
+  // crear un option
+  patentes.forEach(function(patente) {
+    var $option = document.createElement('option');
+    //agregarle como inner text ese elemento
+    $option.innerText = patente;
+    //agregarselo como hijo a select
+    $platesList.appendChild($option);
+  });
 }
 
 $agregar.onclick = function() {
@@ -86,6 +97,3 @@ $editar.onclick = function() {
   //mostrarlo al ausuario
   mostrarPatentes();
 };
-
-//agregar numero de patentes a una lista y poder verlas y editarlas despues.
-// tambien poder arrepentirse de agregarla
