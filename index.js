@@ -1,3 +1,19 @@
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'patentes.json');
+xhr.send(null); // starts to execute the request.
+
+xhr.onreadystatechange = function() {
+  var CLIENT_DONE = 4; // readyState 4 means the request is done.
+  var SERVER_OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === CLIENT_DONE) {
+    if (xhr.status === SERVER_OK) {
+      // response is an array of books.
+      patentes = JSON.parse(xhr.responseText);
+      mostrarPatentes();
+    }
+  }
+};
+
 var $agregar = document.getElementById('agregar');
 var $borrar = document.getElementById('borrar');
 var $editar = document.getElementById('editar');
